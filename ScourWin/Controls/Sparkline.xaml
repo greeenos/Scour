@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl
+    x:Class="Scour.Controls.Sparkline"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    SizeChanged="OnSizeChanged">
+
+    <Grid x:Name="Root" Background="Transparent">
+        <Polygon x:Name="Area" />
+        <Polyline x:Name="Line" StrokeThickness="2" StrokeLineJoin="Round" />
+    </Grid>
+</UserControl>

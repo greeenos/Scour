@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Application
+    x:Class="Scour.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Scour">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
+                <ResourceDictionary Source="ms-appx:///Styles/Colors.xaml" />
+                <ResourceDictionary Source="ms-appx:///Styles/Theme.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <local:BoolToVisibilityConverter x:Key="BoolToVisibility" />
+            <local:BoolToStatusBrushConverter x:Key="BoolToStatusBrush" />
+            <local:InverseBoolConverter x:Key="InverseBool" />
+            <local:KindToGlyphConverter x:Key="KindToGlyph" />
+            <local:StringNotEmptyToVisibilityConverter x:Key="StringNotEmptyToVisibility" />
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

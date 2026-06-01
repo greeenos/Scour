@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="Scour.Views.SettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ScrollViewer>
+        <StackPanel Margin="16" Spacing="18" MaxWidth="720" HorizontalAlignment="Left">
+            <TextBlock Text="Settings" Style="{ThemeResource TitleTextBlockStyle}" />
+
+            <!-- Search sensitivity -->
+            <StackPanel Spacing="6">
+                <TextBlock Text="Search sensitivity" Style="{ThemeResource SubtitleTextBlockStyle}" />
+                <TextBlock Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap"
+                           Text="How aggressively to match leftover files. Strict = exact matches only (safest). Deep = also matches publisher and partial names (finds more, but more false positives)." />
+                <ComboBox x:Name="SensitivityBox" SelectionChanged="OnSensitivityChanged" MinWidth="200">
+                    <ComboBoxItem Content="Strict" />
+                    <ComboBoxItem Content="Enhanced" />
+                    <ComboBoxItem Content="Deep" />
+                </ComboBox>
+            </StackPanel>
+
+            <!-- Appearance -->
+            <StackPanel Spacing="6">
+                <TextBlock Text="Appearance" Style="{ThemeResource SubtitleTextBlockStyle}" />
+                <ComboBox x:Name="ThemeBox" Header="Theme" SelectionChanged="OnThemeChanged" MinWidth="200">
+                    <ComboBoxItem Content="System" />
+                    <ComboBoxItem Content="Light" />
+                    <ComboBoxItem Content="Dark" />
+                </ComboBox>
+            </StackPanel>
+
+            <!-- Removal behavior -->
+            <StackPanel Spacing="6">
+                <TextBlock Text="Removal" Style="{ThemeResource SubtitleTextBlockStyle}" />
+                <ToggleSwitch x:Name="RecycleToggle" Header="Send removed items to the Recycle Bin"
+                              OffContent="Delete permanently" OnContent="Recycle Bin" Toggled="OnToggle" />
+                <ToggleSwitch x:Name="ConfirmToggle" Header="Confirm before removing" Toggled="OnToggle" />
+            </StackPanel>
+
+            <!-- Scan scope -->
+            <StackPanel Spacing="6">
+                <TextBlock Text="Scan scope" Style="{ThemeResource SubtitleTextBlockStyle}" />
+                <ToggleSwitch x:Name="RegistryToggle" Header="Include registry keys" Toggled="OnToggle" />
+                <ToggleSwitch x:Name="ServicesToggle" Header="Include Windows services" Toggled="OnToggle" />
+            </StackPanel>
+
+            <!-- Automation -->
+            <StackPanel Spacing="8">
+                <TextBlock Text="Automation" Style="{ThemeResource SubtitleTextBlockStyle}" />
+                <ToggleSwitch x:Name="TrayToggle" Header="Close to system tray (keep running in background)" Toggled="OnAutomationToggle" />
+                <ToggleSwitch x:Name="StartupToggle" Header="Launch Scour when I sign in" Toggled="OnAutomationToggle" />
+
+                <ToggleSwitch x:Name="AutoRamToggle" Header="Automatically free memory" Toggled="OnAutomationToggle" />
+                <Grid ColumnSpacing="12" Margin="0,-4,0,0"
+                      Visibility="{x:Bind AutoRamToggle.IsOn, Mode=OneWay, Converter={StaticResource BoolToVisibility}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <NumberBox x:Name="RamIntervalBox" Grid.Column="0" Header="Every (minutes)" Minimum="1" Maximum="720"
+                               SpinButtonPlacementMode="Inline" ValueChanged="OnNumberChanged" MinWidth="150" />
+                    <NumberBox x:Name="RamThresholdBox" Grid.Column="1" Header="When usage above (%)" Minimum="10" Maximum="99"
+                               SpinButtonPlacementMode="Inline" ValueChanged="OnNumberChanged" MinWidth="170" />
+                </Grid>
+
+                <ToggleSwitch x:Name="AutoUpdateToggle" Header="Automatically update apps daily (winget)" Toggled="OnAutomationToggle" />
+                <TextBlock Style="{StaticResource StatCaption}"
+                           Text="Daily updates run as a background Windows Scheduled Task (even when the app is closed). RAM cleaning runs while the app is open or in the tray." />
+            </StackPanel>
+
+            <!-- Exclusions -->
+            <StackPanel Spacing="6">
+                <TextBlock Text="Exclusions" Style="{ThemeResource SubtitleTextBlockStyle}" />
+                <TextBlock Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap"
+                           Text="One path or fragment per line. Any leftover whose path contains one of these is never shown or removed." />
+                <TextBox x:Name="ExclusionsBox" AcceptsReturn="True" TextWrapping="Wrap" MinHeight="100"
+                         PlaceholderText="C:\Users\me\AppData\Roaming\KeepThis" LostFocus="OnExclusionsChanged" />
+            </StackPanel>
+
+            <TextBlock Foreground="{ThemeResource TextFillColorTertiaryBrush}" FontSize="12"
+                       Text="Scour for Windows — a port of the macOS app cleaner. Removes apps and the files they leave behind." />
+        </StackPanel>
+    </ScrollViewer>
+</Page>

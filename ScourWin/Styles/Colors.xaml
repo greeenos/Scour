@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Scour signature green accent -->
+    <Color x:Key="PearGreen">#34C759</Color>
+    <SolidColorBrush x:Key="PearAccentBrush" Color="{StaticResource PearGreen}" />
+
+    <x:Double x:Key="SidebarWidth">300</x:Double>
+
+</ResourceDictionary>
